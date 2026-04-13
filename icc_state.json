@@ -1,0 +1,172 @@
+{
+  "params": {
+    "swing_lookback": 3,
+    "atr_period": 14,
+    "sl_atr_mult": 1.0,
+    "min_sl": 10.0,
+    "min_move_atr": 1.5,
+    "tp_move_mult": 1.5,
+    "min_rr": 1.5,
+    "correction_depth_max": 0.75
+  },
+  "active_setups": [
+    {
+      "direction": "SELL",
+      "l1": {
+        "price": 4664.87,
+        "epoch": 1776038400
+      },
+      "h1": {
+        "price": 4795.1,
+        "epoch": 1775829600
+      },
+      "entry_swing": {
+        "price": 4739.82,
+        "epoch": 1776063600
+      },
+      "entry_price": 4739.82,
+      "stop_loss": 4800.1,
+      "take_profit": 4544.47,
+      "risk_reward": 3.2,
+      "move_size": 130.23,
+      "correction_depth": 57.6,
+      "atr_at_entry": 23.94,
+      "status": "ACTIVE",
+      "confidence": 100,
+      "detected_time": "2026-04-13T11:20:35.993292+00:00",
+      "h1_trend": "DOWNTREND",
+      "h4_trend": "UPTREND"
+    }
+  ],
+  "completed_setups": [],
+  "predictions": [
+    {
+      "time": "2026-04-13T07:08:52.715472+00:00",
+      "price": 4733.76,
+      "h1_trend": "RANGING",
+      "h4_trend": "RANGING",
+      "h1_detail": {
+        "hh": 1,
+        "hl": 2,
+        "lh": 1,
+        "ll": 2
+      },
+      "active_setups": 0,
+      "new_setups": 0
+    },
+    {
+      "time": "2026-04-13T07:13:06.329705+00:00",
+      "price": 4726.1,
+      "h1_trend": "RANGING",
+      "h4_trend": "RANGING",
+      "h1_detail": {
+        "hh": 1,
+        "hl": 2,
+        "lh": 1,
+        "ll": 2
+      },
+      "active_setups": 0,
+      "new_setups": 0
+    },
+    {
+      "time": "2026-04-13T11:20:35.993544+00:00",
+      "price": 4721.19,
+      "h1_trend": "DOWNTREND",
+      "h4_trend": "UPTREND",
+      "h1_detail": {
+        "hh": 0,
+        "hl": 2,
+        "lh": 2,
+        "ll": 2
+      },
+      "active_setups": 1,
+      "new_setups": 1
+    },
+    {
+      "time": "2026-04-13T12:11:22.020227+00:00",
+      "price": 4717.24,
+      "h1_trend": "DOWNTREND",
+      "h4_trend": "RANGING",
+      "h1_detail": {
+        "hh": 0,
+        "hl": 2,
+        "lh": 2,
+        "ll": 2
+      },
+      "active_setups": 1,
+      "new_setups": 0
+    },
+    {
+      "time": "2026-04-13T13:03:30.730151+00:00",
+      "price": 4724.36,
+      "h1_trend": "DOWNTREND",
+      "h4_trend": "RANGING",
+      "h1_detail": {
+        "hh": 0,
+        "hl": 2,
+        "lh": 2,
+        "ll": 2
+      },
+      "active_setups": 1,
+      "new_setups": 0
+    },
+    {
+      "time": "2026-04-13T14:03:48.271075+00:00",
+      "price": 4721.68,
+      "h1_trend": "DOWNTREND",
+      "h4_trend": "RANGING",
+      "h1_detail": {
+        "hh": 0,
+        "hl": 2,
+        "lh": 2,
+        "ll": 2
+      },
+      "active_setups": 1,
+      "new_setups": 0
+    },
+    {
+      "time": "2026-04-13T15:04:17.940419+00:00",
+      "price": 4708.8,
+      "h1_trend": "DOWNTREND",
+      "h4_trend": "RANGING",
+      "h1_detail": {
+        "hh": 0,
+        "hl": 2,
+        "lh": 2,
+        "ll": 2
+      },
+      "active_setups": 1,
+      "new_setups": 0
+    },
+    {
+      "time": "2026-04-13T17:23:12.371445+00:00",
+      "price": 4745.04,
+      "h1_trend": "DOWNTREND",
+      "h4_trend": "RANGING",
+      "h1_detail": {
+        "hh": 0,
+        "hl": 2,
+        "lh": 2,
+        "ll": 2
+      },
+      "active_setups": 1,
+      "new_setups": 0
+    },
+    {
+      "time": "2026-04-13T18:03:26.980514+00:00",
+      "price": 4731.51,
+      "h1_trend": "DOWNTREND",
+      "h4_trend": "RANGING",
+      "h1_detail": {
+        "hh": 0,
+        "hl": 2,
+        "lh": 2,
+        "ll": 2
+      },
+      "active_setups": 1,
+      "new_setups": 0
+    }
+  ],
+  "learning_log": [],
+  "last_analysis_epoch": 1776103200
+}

@@ -1,0 +1,6 @@
+.env
+__pycache__/
+*.pyc
+*.pid
+icc_output.log
+.venv/
