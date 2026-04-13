@@ -330,4 +330,32 @@ The remote agent will start adding entries to the "Observation Log" section belo
 
 *Claude observation agent entries will appear here. Each entry is timestamped and includes what was observed, patterns found, and filter proposals.*
 
-<!-- No observations yet — agent not yet scheduled -->
+---
+
+### 2026-04-13 ~18:00 UTC — First observation run
+
+**Status:** No completed trades yet. 1 active setup being tracked.
+
+**Active Setup — SELL @ 4739.82**
+- Detected: 2026-04-13 11:20 UTC (London session — good timing)
+- H1: 4795.10 → L1: 4664.87 → LH: 4739.82
+- Correction depth: 57.6% — within ideal 35-65% range ✓
+- Move size: 130.23 (~5.4x ATR of 23.94) — large indication move ✓
+- R:R: 1:3.2 — well above 1.5 minimum ✓
+- Confidence: 100/100
+
+**Key Flag — H4 Trend Conflict:**
+H1 trend = DOWNTREND, H4 trend = UPTREND. The setup is selling into a higher-timeframe uptrend.
+This is the exact scenario flagged in "Next Steps to Explore" — no higher-TF filter is active yet.
+The Apr 10 prediction was correct (SELL to 4664 worked at ~4:1), but that was a pure gap-down move.
+This continuation SELL is entering after the gap, with the H4 still bullish — risk is a reversal back toward 4795+.
+
+**Price behavior since detection (11:20 → 18:00 UTC):**
+Predictions show price oscillating 4708-4745 during the period. Setup has not been stopped out (SL 4800.10) and has not hit TP (4544.47). Current price ~4731 is below entry 4739.82 — trade is nominally in profit.
+
+**No pattern conclusions yet** — 0 completed trades. Cannot derive win rates. Observing.
+
+**To watch on resolution:**
+- If SELL wins: note whether H4 conflict mattered (it didn't stop the move)
+- If SELL loses (SL at 4800): this becomes data point #1 for "H1 vs H4 conflict → loss"
+- Correction depth 57.6% is in the middle of the ideal range — neutral data point regardless of outcome
