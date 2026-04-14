@@ -208,13 +208,12 @@ nohup python icc_monitor.py &  # Background — runs while terminal is closed
 
 | File | Purpose |
 |------|---------|
-| `icc_poc.py` | v1 — level-break based detection (kept for reference) |
-| `icc_poc_v2.py` | v2/v3 — structure-based backtest with ATR SL + extended TP |
 | `icc_monitor.py` | Live monitor — real-time ICC detection + self-learning |
+| `icc_analysis.sh` | Hourly cron — Claude reads state, updates Observation Log |
 | `icc_state.json` | Persisted state: active setups, outcomes, learned params |
 | `icc_monitor_log.json` | Event log: all detections, outcomes, learning adjustments |
-| `analyze_example.py` | Helper to inspect candle data around specific dates |
 | `ICC_STRATEGY.md` | This file — strategy logic, results, predictions |
+| `RUNNING.md` | How to start/stop the monitor and check logs |
 | `.env` | Deriv API credentials and config |
 
 ## What We Learned
@@ -329,6 +328,107 @@ The remote agent will start adding entries to the "Observation Log" section belo
 ## Observation Log
 
 *Claude observation agent entries will appear here. Each entry is timestamped and includes what was observed, patterns found, and filter proposals.*
+
+---
+
+### 2026-04-14 06:04 UTC — Hourly observation
+
+**Status:** 0 completed trades. 1 active SELL. No new setups.
+
+**Active SELL @ 4739.82 — latest snapshot (06:04 UTC):**
+- Price: **$4765.91** — $26.09 against trade
+- SL ($4800.10) distance: **$34.19** | TP ($4544.47) distance: $221.44
+- Price pulled back from overnight high of $4774.79 → dropped to $4761.10 → bounced to $4765.91. Micro-range of ~$14 over last two candles.
+
+**Trend state (both timeframes flipped since 05:44 candle):**
+- H1: **UPTREND** (HH:2 HL:2 — clean bullish structure)
+- H4: **DOWNTREND**
+
+H4 now aligns with the SELL thesis for the first time since entry, but H1 is actively moving against it. At entry, the conflict was H4=UPTREND vs H1=DOWNTREND. That conflict has fully inverted: H4=DOWNTREND vs H1=UPTREND. Neither configuration is clean alignment. Price is being pushed up by H1 structure even as H4 turns down.
+
+**Critical level:** $4795.10 (original swing high). A close above this invalidates the setup regardless of SL. Currently $29.19 away.
+
+No completed trades — no analysis conclusions possible. Watching for resolution.
+
+---
+
+### 2026-04-14 05:44 UTC — Candle close event
+
+Price pulled back: **$4774.79 → $4761.10** (-$13.69). SL distance recovered: $25 → **$39**.
+
+**Trend flip (notable):**
+- H1: RANGING → **UPTREND** (HH:2 HL:2 now dominating)
+- H4: RANGING → **DOWNTREND**
+
+Trends are now inverted vs. entry (was H1=DOWNTREND, H4=UPTREND). Both timeframes flipping repeatedly = choppy ranging market. The SELL setup was caught in low-conviction structure. SELL still active, no SL/TP hit.
+
+---
+
+### 2026-04-14 05:30 UTC — Overnight update (5 candles)
+
+**Status:** 0 completed trades. Active SELL approaching SL — high-alert.
+
+**Active SELL @ 4739.82 — overnight price action:**
+
+| Time (UTC) | Price | H1 Trend | H4 Trend |
+|------------|-------|----------|----------|
+| 22:13 Apr 13 | 4751.26 | RANGING | RANGING |
+| 23:38 Apr 13 | 4758.37 | RANGING | RANGING |
+| 01:23 Apr 14 | 4772.07 | RANGING | RANGING |
+| 02:57 Apr 14 | 4774.77 | RANGING | RANGING |
+| 04:25 Apr 14 | 4774.79 | RANGING | RANGING |
+
+- **Current price: $4774.79 — only $25.31 from SL (4800.10)**
+- Price has moved $35 AGAINST the trade since entry at $4739.82
+- Both H1 and H4 have been RANGING for 9+ consecutive candles — zero trend conviction
+- The original SELL was detected into a H1 DOWNTREND with H4 conflict (UPTREND). The downtrend has since fully unwound.
+
+**Pattern emerging (1 trade — observation only, not conclusive):**
+This SELL was flagged at detection with H4 = UPTREND conflict. Price has since moved against it by 1.5x ATR. The H4 conflict flag was the right early warning. If this resolves as a LOSS, it will be data point #1 for: *SELL setups with H4 = UPTREND at entry have adverse price action even when H1 trend supports the setup.*
+
+**Next critical level:** SL at $4800.10. Also watch $4795.10 (original H1 swing high) — a close above this level invalidates the entire sell structure regardless of SL.
+
+---
+
+### 2026-04-13 20:43 UTC — Hourly observation
+
+No new events. 1 active SELL @ 4739.82. Last price: $4743.39. H1 and H4 both RANGING. Next candle closes 21:00 UTC.
+
+---
+
+### 2026-04-13 20:10 UTC — Hourly observation
+
+**Status:** 0 completed trades. 1 active SELL. No new setups.
+
+**Active SELL @ 4739.82 update:**
+- Current price: $4743.39 — **3.57 above entry** (nominally underwater)
+- Distance to SL: $56.71 | Distance to TP: $198.92
+- Price range since detection: $4708.80 (15:04) – $4745.04 (17:23)
+
+**Notable: H1 trend shifted DOWNTREND → RANGING at 20:00 UTC candle**
+- Structure at 20:04: HH:1 HL:2 LH:2 LL:1 — balanced, no longer a clean downtrend
+- H4 trend: still RANGING (has been RANGING since 12:11 UTC)
+- Both timeframes now RANGING — original SELL was detected when H1=DOWNTREND, H4=UPTREND (conflict). Now both RANGING — conflict resolved but trend conviction also gone.
+- Setup thesis weakening: sell entered at correction of a downtrend, but that downtrend is no longer confirmed on H1.
+
+**Nothing to conclude yet** — 0 completed trades. Watching for SL/TP hit.
+
+---
+
+### 2026-04-13 ~19:00 UTC — Hourly loop initialized
+
+**Status:** 0 completed trades. 1 active SELL. Automated hourly observation loop started.
+
+**Monitor:** Running (PID 61496). Last candle processed: 18:03 UTC. Price at last tick: 4731.51.
+
+**Active SELL @ 4739.82 — intraday update:**
+- H4 trend shifted UPTREND → RANGING by 12:11 UTC (conflict softened)
+- Price range since entry (11:20 → 18:03 UTC): 4708.80 – 4745.04
+- Setup is not stopped out. SL 4800.10 not threatened.
+- Currently ~8 pts below entry — nominally profitable
+- No new setups detected
+
+**Nothing new to learn yet.** Watching for OUTCOME event.
 
 ---
 
